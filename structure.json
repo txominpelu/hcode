@@ -13,6 +13,7 @@
  'num_videos': 5,
  'requests': [{'endpoint': 0, 'requests': 1500, 'video': 3},
               {'endpoint': 1, 'requests': 1000, 'video': 0},
+              {'endpoint': 0, 'requests': 1000, 'video': 2},
               {'endpoint': 0, 'requests': 500, 'video': 4},
               {'endpoint': 0, 'requests': 1000, 'video': 1}],
  'videos': [50, 50, 80, 30, 110]}
