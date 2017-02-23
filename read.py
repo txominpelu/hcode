@@ -48,6 +48,21 @@ def read_request(f):
       "endpoint": params[1],
       "requests": params[2]}
 
+def assign(params):
+    results = [ { "left": params["caches_size"], "videos_stored": [] } for i in range(0, params["num_caches"]) ]
+    for i,v in enumerate(params["videos"]):
+        bigger_size = max([ x["left"] for x in results])
+        bigger_size_index = [ x["left"] for x in results].index(bigger_size)
+        if  bigger_size >= v :
+            results[bigger_size_index]["left"] = results[bigger_size_index]["left"] - v
+            results[bigger_size_index]["videos_stored"].append(i)
+    return results
+
+def print_result(results):
+    print len(results)
+    for i,v in enumerate(results):
+        print "{0} {1}".format(i, " ".join([str(x) for x in results[i]]))
+
 
 if __name__ == "__main__":
     with open(sys.argv[1]) as f:
@@ -55,7 +70,9 @@ if __name__ == "__main__":
         params["videos"] = read_video_sizes(f.next())
         params["endpoints"] = [read_endpoint(f) for i in range(0,params['num_endpoints'])]
         params["requests"] = [read_request(f) for i in range(0,params['num_request_descriptions'])]
-        pprint.pprint(params)
+        #pprint.pprint(params)
+        print_result([x["videos_stored"] for x in assign(params)])
+        #pprint.pprint(assign(params))
 
 
 
